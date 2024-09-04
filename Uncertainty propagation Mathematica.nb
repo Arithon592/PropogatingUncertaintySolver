@@ -1,0 +1,198 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 14.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7215,        190]
+NotebookOptionsPosition[      6760,        175]
+NotebookOutlinePosition[      7167,        191]
+CellTagsIndexPosition[      7124,        188]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"uncert", "[", "f_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"var", ",", "funcs", ",", "uvar"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"var", "=", 
+      RowBox[{"Variables", "[", 
+       RowBox[{"DeleteDuplicates", "@", 
+        RowBox[{"Cases", "[", 
+         RowBox[{"f", ",", "_Symbol", ",", "\[Infinity]"}], "]"}]}], "]"}]}], 
+     ";", 
+     RowBox[{"funcs", "=", 
+      RowBox[{"Complement", "[", 
+       RowBox[{
+        RowBox[{"Variables", "[", "f", "]"}], ",", "var"}], "]"}]}], ";", 
+     RowBox[{"uvar", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Symbol", "[", 
+         RowBox[{"\"\<\[CapitalDelta]\>\"", "<>", 
+          RowBox[{"ToString", "[", "#", "]"}]}], "]"}], "&"}], "/@", 
+       "var"}]}], ";", 
+     RowBox[{"FullSimplify", "[", 
+      RowBox[{
+       SqrtBox[
+        RowBox[{"Sum", "[", 
+         RowBox[{
+          SuperscriptBox[
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"D", "[", 
+              RowBox[{"f", ",", 
+               RowBox[{"var", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "*", 
+             RowBox[{"uvar", "[", 
+              RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "2"], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "1", ",", 
+            RowBox[{"Length", "[", "var", "]"}]}], "}"}]}], "]"}]], ",", 
+       RowBox[{"Assumptions", "->", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"var", ",", "uvar"}], "}"}], "\[Element]", 
+         TemplateBox[{},
+          "Reals"]}]}]}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.934321956069971*^9, 3.9343219913800297`*^9}, {
+  3.934322090574997*^9, 3.934322207478733*^9}, {3.934322451731371*^9, 
+  3.934322453540634*^9}, {3.934322813216574*^9, 3.9343228166702766`*^9}, {
+  3.9343253965640774`*^9, 3.934325481917923*^9}, {3.934351896212044*^9, 
+  3.9343519135612316`*^9}, {3.9343527263804855`*^9, 3.934352730109392*^9}},
+ CellLabel->"In[14]:=",ExpressionUUID->"13f347dd-c5c6-634d-9399-14a8b958786a"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"uncertPython", "[", "f_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"var", ",", "funcs", ",", "uvar", ",", "temp"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"var", "=", 
+      RowBox[{"Variables", "[", 
+       RowBox[{"DeleteDuplicates", "@", 
+        RowBox[{"Cases", "[", 
+         RowBox[{"f", ",", "_Symbol", ",", "\[Infinity]"}], "]"}]}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"uvar", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Symbol", "[", 
+         RowBox[{"\"\<u\>\"", "<>", 
+          RowBox[{"ToString", "[", "#", "]"}]}], "]"}], "&"}], "/@", 
+       "var"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"temp", "=", 
+      RowBox[{"FullSimplify", "[", 
+       RowBox[{
+        SqrtBox[
+         RowBox[{"Sum", "[", 
+          RowBox[{
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"D", "[", 
+               RowBox[{"f", ",", 
+                RowBox[{"var", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "*", 
+              RowBox[{"uvar", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]}], ")"}], "2"], ",", 
+           RowBox[{"{", 
+            RowBox[{"i", ",", "1", ",", 
+             RowBox[{"Length", "[", "var", "]"}]}], "}"}]}], "]"}]], ",", 
+        RowBox[{"Assumptions", "->", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"var", ",", "uvar"}], "}"}], "\[Element]", 
+          TemplateBox[{},
+           "Reals"]}]}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"funcs", "=", 
+      RowBox[{
+       RowBox[{"StringSplit", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"ToString", "[", 
+            RowBox[{"InputForm", "[", "#", "]"}], "]"}], "&"}], "/@", 
+          RowBox[{"Complement", "[", 
+           RowBox[{
+            RowBox[{"Variables", "[", "temp", "]"}], ",", 
+            RowBox[{"Variables", "[", 
+             RowBox[{"DeleteDuplicates", "@", 
+              RowBox[{"Cases", "[", 
+               RowBox[{"temp", ",", "_Symbol", ",", "\[Infinity]"}], "]"}]}], 
+             "]"}]}], "]"}]}], ",", "\"\<[\>\""}], "]"}], "[", 
+       RowBox[{"[", 
+        RowBox[{";;", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"StringReplace", "[", 
+      RowBox[{
+       RowBox[{"StringReplace", "[", 
+        RowBox[{
+         RowBox[{"ToString", "[", 
+          RowBox[{"InputForm", "[", "temp", "]"}], "]"}], ",", 
+         RowBox[{"Join", "[", 
+          RowBox[{"Thread", "[", 
+           RowBox[{
+            RowBox[{"ToString", "/@", "funcs"}], "->", 
+            RowBox[{"Map", "[", 
+             RowBox[{
+              RowBox[{"StringTemplate", "[", "\"\<np.`1`\>\"", "]"}], ",", 
+              RowBox[{"ToString", "/@", 
+               RowBox[{"ToLowerCase", "[", "funcs", "]"}]}]}], "]"}]}], "]"}],
+           "]"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"\"\<[\>\"", "->", "\"\<(\>\""}], ",", 
+         RowBox[{"\"\<]\>\"", "->", "\"\<)\>\""}], ",", 
+         RowBox[{"\"\<Sqrt\>\"", "->", "\"\<np.sqrt\>\""}], ",", 
+         RowBox[{"\"\<^\>\"", "->", "\"\<**\>\""}], ",", 
+         RowBox[{"\"\<Pi\>\"", "->", "\"\<np.pi\>\""}], ",", 
+         RowBox[{"\"\<E\>\"", "->", "\"\<np.exp(1)\>\""}]}], "}"}]}], 
+      "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.9343266595300236`*^9, 3.934326873192091*^9}, {
+  3.934327028653471*^9, 3.9343270294815865`*^9}, {3.934327090382155*^9, 
+  3.934327128079403*^9}, {3.934327368503483*^9, 3.9343273893308105`*^9}, {
+  3.934327457524082*^9, 3.93432746545138*^9}, {3.934327510462879*^9, 
+  3.9343275117708015`*^9}, {3.9343275461420164`*^9, 3.9343276631827946`*^9}, {
+  3.934327790391215*^9, 3.934327791902146*^9}, {3.9343278238666058`*^9, 
+  3.934327838447985*^9}, {3.934328185922882*^9, 3.934328189057255*^9}, {
+  3.934328437762804*^9, 3.934328453951618*^9}, {3.93435186252936*^9, 
+  3.9343518860617085`*^9}, {3.934352746155159*^9, 3.934352749616043*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"64dfbeab-1f83-9045-85b8-7479d70f4af3"]
+},
+WindowSize->{1920, 1011.75},
+WindowMargins->{{-6, Automatic}, {Automatic, -6}},
+FrontEndVersion->"14.0 for Microsoft Windows (64-bit) (December 12, 2023)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"54e4f355-b6f5-6046-bfe3-2d85a7177727"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2060, 53, 103, "Input",ExpressionUUID->"13f347dd-c5c6-634d-9399-14a8b958786a"],
+Cell[2621, 75, 4135, 98, 150, "Input",ExpressionUUID->"64dfbeab-1f83-9045-85b8-7479d70f4af3"]
+}
+]
+*)
+
